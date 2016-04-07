@@ -3,7 +3,7 @@ import pandas as pd
 import sklearn
 from sklearn import cross_validation
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
 
 #Import data
 train = pd.read_csv("train.csv", delimiter=',')
@@ -31,13 +31,13 @@ clf = GaussianNB()
 
 clf.fit(train_X, train_y)
 
-#Get f1 score
-pred_train = clf.predict(train_X)
-pred_test = clf.predict(test_X)
+#Get accuracy score
+pred_train = clf.predict(train_X[:5000])
+pred_test = clf.predict(test_X[:5000])
 
-#f1_train = f1_score(train_y, pred_train)
-f1_test = f1_score(test_y, pred_test)
+accuracy_train = accuracy_score(train_y[:5000], pred_train)
+accuracy_test = accuracy_score(test_y[:5000], pred_test)
 
-#print('F1 score on training data is: ' + str(f1_train))
-print('F1 score on testing data is: ' + str(f1_test))
+print('Accuracy score on training data is: ' + str(accuracy_train))
+print('Accuracy score on testing data is: ' + str(accuracy_test))
 
